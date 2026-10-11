@@ -16,8 +16,11 @@
     <string name="sand">رمل للم³ (دج)</string>
     <string name="gravel">حصى للم³ (دج)</string>
     <string name="vol_dosage">حجم الخرسانة (م³، عيار 300)</string>
-    <string name="offline_note">أسعار افتراضية قابلة للتعديل، يعمل دون إنترنت. بدون حساب.</string>
+    <string name="offline_note">أسعار افتراضية قابلة للتعديل، تعمل دون إنترنت. بدون حساب.</string>
     <string name="log_title">دفتر الورشة</string>
     <string name="log_hint">قياس / ملاحظة (مثال: بلاطة 5x4)</string>
     <string name="save">حفظ</string>
+    <string name="saved_msg">تم الحفظ في السجل</string>
+    <string name="use_light">إنارة (3٪)</string>
+    <string name="use_other">أخرى (5٪)</string>
 </resources>
