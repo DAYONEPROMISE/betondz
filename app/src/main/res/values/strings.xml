@@ -8,7 +8,7 @@
     <string name="length">Longueur (m)</string>
     <string name="width">Largeur (m)</string>
     <string name="thick">Épaisseur (cm)</string>
-    <string name="loss">Pertes (%)</string>
+    <string name="loss">Pertes (%%)</string>
     <string name="mortar_title">Calculateur mortier</string>
     <string name="vol">Volume (m³)</string>
     <string name="cost_title">Coût matériaux (DZD)</string>
@@ -21,4 +21,6 @@
     <string name="log_hint">Mesure / note (ex: dalle 5x4)</string>
     <string name="save">Enregistrer</string>
     <string name="saved_msg">Enregistré dans l\'historique</string>
+    <string name="use_light">Éclairage (3%%)</string>
+    <string name="use_other">Autre (5%%)</string>
 </resources>
