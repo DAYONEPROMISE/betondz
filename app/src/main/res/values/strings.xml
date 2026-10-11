@@ -16,7 +16,7 @@
     <string name="sand">Sable par m³ (DZD)</string>
     <string name="gravel">Gravier par m³ (DZD)</string>
     <string name="vol_dosage">Volume béton (m³, dosage 300)</string>
-    <string name="offline_note">Prix par défaut modifiables, 100% hors ligne. Aucun compte.</string>
+    <string name="offline_note">Prix par défaut modifiables, 100%% hors ligne. Aucun compte.</string>
     <string name="log_title">Carnet de chantier (Room, offline)</string>
     <string name="log_hint">Mesure / note (ex: dalle 5x4)</string>
     <string name="save">Enregistrer</string>
