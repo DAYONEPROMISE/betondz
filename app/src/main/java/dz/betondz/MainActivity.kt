@@ -17,6 +17,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.room.Room
@@ -37,10 +38,10 @@ private data class BetonTab(val label: String, val icon: ImageVector)
 fun BetonDzApp(db: AppDb) {
     var tab by remember { mutableIntStateOf(0) }
     val tabs = listOf(
-        BetonTab("B\u00e9ton", Icons.Filled.Calculate),
-        BetonTab("Mortier", Icons.Filled.List),
-        BetonTab("Co\u00fbt", Icons.Filled.AttachMoney),
-        BetonTab("Carnet", Icons.Filled.Book)
+        BetonTab(stringResource(R.string.tab_beton), Icons.Filled.Calculate),
+        BetonTab(stringResource(R.string.tab_mortier), Icons.Filled.List),
+        BetonTab(stringResource(R.string.tab_cout), Icons.Filled.AttachMoney),
+        BetonTab(stringResource(R.string.tab_carnet), Icons.Filled.Book)
     )
     DzTheme {
         Scaffold(topBar = { TopAppBar(title = { Text("BetonDZ \u2014 \u0645\u0642\u062f\u0651\u0631 \u0627\u0644\u062e\u0631\u0633\u0627\u0646\u0629") }) },
@@ -80,11 +81,11 @@ fun ConcreteScreen() {
         runCatching { Calculator.volumeFromDims(L, W, T) }.getOrNull() } } }
     val res = vol?.let { runCatching { Calculator.concrete(it, dosage, loss.toDoubleOrNull() ?: 5.0) }.getOrNull() }
     Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("Calculateur b\u00e9ton (hors ligne)", style = MaterialTheme.typography.titleMedium)
-        OutlinedTextField(l, { l = it }, label = { Text("Longueur (m)") })
-        OutlinedTextField(w, { w = it }, label = { Text("Largeur (m)") })
-        OutlinedTextField(t, { t = it }, label = { Text("\u00c9paisseur (cm)") })
-        OutlinedTextField(loss, { loss = it }, label = { Text("Pertes (%)") })
+        Text(stringResource(R.string.calc_title), style = MaterialTheme.typography.titleMedium)
+        OutlinedTextField(l, { l = it }, label = { Text(stringResource(R.string.length)) })
+        OutlinedTextField(w, { w = it }, label = { Text(stringResource(R.string.width)) })
+        OutlinedTextField(t, { t = it }, label = { Text(stringResource(R.string.thick)) })
+        OutlinedTextField(loss, { loss = it }, label = { Text(stringResource(R.string.loss)) })
         Column(Modifier.selectableGroup()) {
             Dosages.concretes.forEachIndexed { i, d ->
                 Row(Modifier.fillMaxWidth().selectable(selected = idx == i, onClick = { idx = i }, role = Role.RadioButton).padding(vertical = 4.dp)) {
@@ -108,11 +109,12 @@ fun ConcreteScreen() {
 fun MortarScreen() {
     var vol by remember { mutableStateOf("1") }
     var idx by remember { mutableIntStateOf(0) }
+    var error by remember { mutableStateOf("") }
     val d = Dosages.mortars[idx]
     val r = vol.toDoubleOrNull()?.let { runCatching { Calculator.mortar(it, d) }.getOrNull() }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("Calculateur mortier", style = MaterialTheme.typography.titleMedium)
-        OutlinedTextField(vol, { vol = it }, label = { Text("Volume (m\u00b3)") })
+        Text(stringResource(R.string.mortar_title), style = MaterialTheme.typography.titleMedium)
+        OutlinedTextField(vol, { vol = it }, label = { Text(stringResource(R.string.vol)) })
         Column(Modifier.selectableGroup()) {
             Dosages.mortars.forEachIndexed { i, m ->
                 Row(Modifier.fillMaxWidth().selectable(selected = idx == i, onClick = { idx = i }, role = Role.RadioButton).padding(vertical = 4.dp)) {
@@ -139,13 +141,13 @@ fun CostScreen() {
     val r = vol.toDoubleOrNull()?.let { runCatching { Calculator.concrete(it, d) }.getOrNull() }
     val p = Calculator.Prices(cement.toDoubleOrNull() ?: 490.0, sand.toDoubleOrNull() ?: 2500.0, gravel.toDoubleOrNull() ?: 3000.0)
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("Co\u00fbt mat\u00e9riaux (DZD)", style = MaterialTheme.typography.titleMedium)
-        OutlinedTextField(cement, { cement = it }, label = { Text("Sac ciment 50kg (DZD)") })
-        OutlinedTextField(sand, { sand = it }, label = { Text("Sable par m\u00b3 (DZD)") })
-        OutlinedTextField(gravel, { gravel = it }, label = { Text("Gravier par m\u00b3 (DZD)") })
-        OutlinedTextField(vol, { vol = it }, label = { Text("Volume b\u00e9ton (m\u00b3, dosage 300)") })
+        Text(stringResource(R.string.cost_title), style = MaterialTheme.typography.titleMedium)
+        OutlinedTextField(cement, { cement = it }, label = { Text(stringResource(R.string.cement_bag)) })
+        OutlinedTextField(sand, { sand = it }, label = { Text(stringResource(R.string.sand)) })
+        OutlinedTextField(gravel, { gravel = it }, label = { Text(stringResource(R.string.gravel)) })
+        OutlinedTextField(vol, { vol = it }, label = { Text(stringResource(R.string.vol_dosage)) })
         r?.let { Text("Total estim\u00e9: ${"%.0f".format(Calculator.costConcrete(it, p))} DZD") }
-        Text("Prix par d\u00e9faut modifiables, 100% hors ligne. Aucun compte.", style = MaterialTheme.typography.bodySmall)
+        Text(stringResource(R.string.offline_note), style = MaterialTheme.typography.bodySmall)
     }
 }
 
@@ -154,15 +156,16 @@ fun LogbookScreen(db: AppDb) {
     val scope = rememberCoroutineScope()
     var items by remember { mutableStateOf(listOf<SiteEntry>()) }
     var title by remember { mutableStateOf("") }
+    var error by remember { mutableStateOf("") }
     LaunchedEffect(Unit) { items = db.entries().all() }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("Carnet de chantier (Room, offline)", style = MaterialTheme.typography.titleMedium)
-        OutlinedTextField(title, { title = it }, label = { Text("Mesure / note (ex: dalle 5x4)") })
+        Text(stringResource(R.string.log_title), style = MaterialTheme.typography.titleMedium)
+        OutlinedTextField(title, { title = it }, label = { Text(stringResource(R.string.log_hint)) })
         Button(onClick = {
             scope.launch {
                 if (title.isNotBlank()) { db.entries().insert(SiteEntry(title = title, details = title, totalDzd = 0.0)); title = ""; items = db.entries().all() }
             }
-        }) { Text("Enregistrer") }
+        }) { Text(stringResource(R.string.save)) }
         items.forEach { e -> Text("\u2022 ${e.title}") }
     }
 }

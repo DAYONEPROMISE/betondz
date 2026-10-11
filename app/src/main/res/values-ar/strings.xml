@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_beton">خرسانة</string>
+    <string name="tab_mortier">ملاط</string>
+    <string name="tab_cout">التكلفة</string>
+    <string name="tab_carnet">الدفتر</string>
+    <string name="calc_title">حاسبة الخرسانة (دون إنترنت)</string>
+    <string name="length">الطول (م)</string>
+    <string name="width">العرض (م)</string>
+    <string name="thick">السماكة (سم)</string>
+    <string name="loss">الهالك (٪)</string>
+    <string name="mortar_title">حاسبة الملاط</string>
+    <string name="vol">الحجم (م³)</string>
+    <string name="cost_title">تكلفة المواد (دج)</string>
+    <string name="cement_bag">كيس إسمنت 50كغ (دج)</string>
+    <string name="sand">رمل للم³ (دج)</string>
+    <string name="gravel">حصى للم³ (دج)</string>
+    <string name="vol_dosage">حجم الخرسانة (م³، عيار 300)</string>
+    <string name="offline_note">أسعار افتراضية قابلة للتعديل، يعمل دون إنترنت. بدون حساب.</string>
+    <string name="log_title">دفتر الورشة</string>
+    <string name="log_hint">قياس / ملاحظة (مثال: بلاطة 5x4)</string>
+    <string name="save">حفظ</string>
+</resources>
