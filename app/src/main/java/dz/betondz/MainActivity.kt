@@ -44,7 +44,7 @@ fun BetonDzApp(db: AppDb) {
         BetonTab(stringResource(R.string.tab_carnet), Icons.Filled.Book)
     )
     DzTheme {
-        Scaffold(topBar = { TopAppBar(title = { Text("BetonDZ \u2014 \u0645\u0642\u062f\u0651\u0631 \u0627\u0644\u062e\u0631\u0633\u0627\u0646\u0629") }) },
+        Scaffold(topBar = { TopAppBar(title = { Text("BetonDZ \u2014 \u0645\u0642\u0651\u0631 \u0627\u0644\u062e\u0631\u0633\u0627\u0646\u0629") }) },
             bottomBar = {
                 NavigationBar {
                     tabs.forEachIndexed { i, t ->
@@ -109,7 +109,6 @@ fun ConcreteScreen() {
 fun MortarScreen() {
     var vol by remember { mutableStateOf("1") }
     var idx by remember { mutableIntStateOf(0) }
-    var error by remember { mutableStateOf("") }
     val d = Dosages.mortars[idx]
     val r = vol.toDoubleOrNull()?.let { runCatching { Calculator.mortar(it, d) }.getOrNull() }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -156,7 +155,6 @@ fun LogbookScreen(db: AppDb) {
     val scope = rememberCoroutineScope()
     var items by remember { mutableStateOf(listOf<SiteEntry>()) }
     var title by remember { mutableStateOf("") }
-    var error by remember { mutableStateOf("") }
     LaunchedEffect(Unit) { items = db.entries().all() }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(stringResource(R.string.log_title), style = MaterialTheme.typography.titleMedium)
