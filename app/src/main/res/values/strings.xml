@@ -8,7 +8,7 @@
     <string name="length">Longueur (m)</string>
     <string name="width">Largeur (m)</string>
     <string name="thick">Épaisseur (cm)</string>
-    <string name="loss">Pertes (%%)</string>
+    <string name="loss">Pertes (%)</string>
     <string name="mortar_title">Calculateur mortier</string>
     <string name="vol">Volume (m³)</string>
     <string name="cost_title">Coût matériaux (DZD)</string>
