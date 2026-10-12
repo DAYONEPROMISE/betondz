@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_title">BetonDZ</string>
     <string name="tab_beton">Béton</string>
     <string name="tab_mortier">Mortier</string>
     <string name="tab_cout">Coût</string>
@@ -25,4 +26,12 @@
     <string name="use_other">Autre (5%%)</string>
     <string name="empty_title">Aucune mesure pour l\'instant</string>
     <string name="empty_hint">Vos calculs enregistrés apparaîtront ici, même hors ligne.</string>
+    <string name="dosage_cleanliness_150">Béton de propreté</string>
+    <string name="dosage_light_250">Béton léger</string>
+    <string name="dosage_slab_300">Dalle</string>
+    <string name="dosage_foundation_350">Fondation</string>
+    <string name="dosage_reinforced_400">Béton armé</string>
+    <string name="dosage_mortar_laying_250">Mortier de pose</string>
+    <string name="dosage_mortar_render_300">Mortier d\'enduit</string>
+    <string name="dosage_mortar_screed_350">Mortier de chape</string>
 </resources>

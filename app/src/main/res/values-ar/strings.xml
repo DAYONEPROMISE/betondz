@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_title">BetonDZ — مقدّر الخرسانة</string>
     <string name="tab_beton">خرسانة</string>
     <string name="tab_mortier">ملاط</string>
     <string name="tab_cout">التكلفة</string>
@@ -25,4 +26,12 @@
     <string name="use_other">أخرى (5٪)</string>
     <string name="empty_title">لا قياسات بعد</string>
     <string name="empty_hint">ستظهر حساباتك المحفوظة هنا، حتى دون إنترنت.</string>
+    <string name="dosage_cleanliness_150">خرسانة نظافة</string>
+    <string name="dosage_light_250">خرسانة خفيفة</string>
+    <string name="dosage_slab_300">بلاطة</string>
+    <string name="dosage_foundation_350">أساسات</string>
+    <string name="dosage_reinforced_400">خرسانة مسلحة</string>
+    <string name="dosage_mortar_laying_250">ملاط بناء</string>
+    <string name="dosage_mortar_render_300">ملاط تبليط</string>
+    <string name="dosage_mortar_screed_350">ملاط تسوية</string>
 </resources>

@@ -33,6 +33,23 @@ class MainActivity : ComponentActivity() {
 
 private data class BetonTab(val label: String, val icon: ImageVector)
 
+/** Maps a data-layer dosage key to a localized label; unknown keys fall back to the key. */
+@Composable
+private fun dosageLabel(key: String): String {
+    val res = when (key) {
+        "cleanliness_150" -> R.string.dosage_cleanliness_150
+        "light_250" -> R.string.dosage_light_250
+        "slab_300" -> R.string.dosage_slab_300
+        "foundation_350" -> R.string.dosage_foundation_350
+        "reinforced_400" -> R.string.dosage_reinforced_400
+        "mortar_laying_250" -> R.string.dosage_mortar_laying_250
+        "mortar_render_300" -> R.string.dosage_mortar_render_300
+        "mortar_screed_350" -> R.string.dosage_mortar_screed_350
+        else -> null
+    }
+    return if (res != null) stringResource(res) else key
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BetonDzApp(db: AppDb) {
@@ -44,7 +61,7 @@ fun BetonDzApp(db: AppDb) {
         BetonTab(stringResource(R.string.tab_carnet), Icons.Filled.Book)
     )
     DzTheme {
-        Scaffold(topBar = { TopAppBar(title = { Text("BetonDZ \u2014 \u0645\u0642\u062f\u0651\u0631 \u0627\u0644\u062e\u0631\u0633\u0627\u0646\u0629") }) },
+        Scaffold(topBar = { TopAppBar(title = { Text(stringResource(R.string.app_title)) }) },
             bottomBar = {
                 NavigationBar {
                     tabs.forEachIndexed { i, t ->
@@ -90,7 +107,7 @@ fun ConcreteScreen() {
             Dosages.concretes.forEachIndexed { i, d ->
                 Row(Modifier.fillMaxWidth().selectable(selected = idx == i, onClick = { idx = i }, role = Role.RadioButton).padding(vertical = 4.dp)) {
                     RadioButton(selected = idx == i, onClick = null)
-                    Text("${d.cementKgM3.toInt()} kg/m\u00b3 \u2014 ${d.labelKey}")
+                    Text("${d.cementKgM3.toInt()} kg/m\u00b3 \u2014 ${dosageLabel(d.labelKey)}")
                 }
             }
         }
@@ -121,7 +138,7 @@ fun MortarScreen() {
             Dosages.mortars.forEachIndexed { i, m ->
                 Row(Modifier.fillMaxWidth().selectable(selected = idx == i, onClick = { idx = i }, role = Role.RadioButton).padding(vertical = 4.dp)) {
                     RadioButton(selected = idx == i, onClick = null)
-                    Text("${m.cementKgM3.toInt()} kg/m\u00b3 \u2014 ${m.labelKey}")
+                    Text("${m.cementKgM3.toInt()} kg/m\u00b3 \u2014 ${dosageLabel(m.labelKey)}")
                 }
             }
         }
