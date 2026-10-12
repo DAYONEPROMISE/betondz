@@ -23,4 +23,6 @@
     <string name="saved_msg">Enregistré dans l\'historique</string>
     <string name="use_light">Éclairage (3%%)</string>
     <string name="use_other">Autre (5%%)</string>
+    <string name="empty_title">Aucune mesure pour l\'instant</string>
+    <string name="empty_hint">Vos calculs enregistrés apparaîtront ici, même hors ligne.</string>
 </resources>

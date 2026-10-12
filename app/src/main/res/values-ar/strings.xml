@@ -23,4 +23,6 @@
     <string name="saved_msg">تم الحفظ في السجل</string>
     <string name="use_light">إنارة (3٪)</string>
     <string name="use_other">أخرى (5٪)</string>
+    <string name="empty_title">لا قياسات بعد</string>
+    <string name="empty_hint">ستظهر حساباتك المحفوظة هنا، حتى دون إنترنت.</string>
 </resources>

@@ -44,7 +44,7 @@ fun BetonDzApp(db: AppDb) {
         BetonTab(stringResource(R.string.tab_carnet), Icons.Filled.Book)
     )
     DzTheme {
-        Scaffold(topBar = { TopAppBar(title = { Text("BetonDZ \u2014 \u0645\u0642\u0651\u0631 \u0627\u0644\u062e\u0631\u0633\u0627\u0646\u0629") }) },
+        Scaffold(topBar = { TopAppBar(title = { Text("BetonDZ \u2014 \u0645\u0642\u062f\u0651\u0631 \u0627\u0644\u062e\u0631\u0633\u0627\u0646\u0629") }) },
             bottomBar = {
                 NavigationBar {
                     tabs.forEachIndexed { i, t ->
@@ -81,7 +81,7 @@ fun ConcreteScreen() {
         runCatching { Calculator.volumeFromDims(L, W, T) }.getOrNull() } } }
     val res = vol?.let { runCatching { Calculator.concrete(it, dosage, loss.toDoubleOrNull() ?: 5.0) }.getOrNull() }
     Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(stringResource(R.string.calc_title), style = MaterialTheme.typography.titleMedium)
+        Text(stringResource(R.string.calc_title), style = MaterialTheme.typography.titleLarge)
         OutlinedTextField(l, { l = it }, label = { Text(stringResource(R.string.length)) })
         OutlinedTextField(w, { w = it }, label = { Text(stringResource(R.string.width)) })
         OutlinedTextField(t, { t = it }, label = { Text(stringResource(R.string.thick)) })
@@ -95,12 +95,15 @@ fun ConcreteScreen() {
             }
         }
         res?.let {
-            HorizontalDivider()
-            Text("Volume avec pertes: ${"%.2f".format(it.volumeM3)} m\u00b3")
-            Text("Ciment: ${"%.0f".format(it.cementKg)} kg = ${it.bagsRoundedUp} sacs de 50 kg")
-            Text("Sable: ${"%.0f".format(it.sandKg)} kg (${"%.2f".format(it.sandM3)} m\u00b3)")
-            Text("Gravier: ${"%.0f".format(it.gravelKg)} kg (${"%.2f".format(it.gravelM3)} m\u00b3)")
-            Text("Eau: ${"%.0f".format(it.waterL)} L (E/C 0.50, ne pas rajouter apr\u00e8s malaxage)")
+            ElevatedCard(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text("Volume avec pertes: ${"%.2f".format(it.volumeM3)} m\u00b3")
+                    Text("Ciment: ${"%.0f".format(it.cementKg)} kg = ${it.bagsRoundedUp} sacs de 50 kg")
+                    Text("Sable: ${"%.0f".format(it.sandKg)} kg (${"%.2f".format(it.sandM3)} m\u00b3)")
+                    Text("Gravier: ${"%.0f".format(it.gravelKg)} kg (${"%.2f".format(it.gravelM3)} m\u00b3)")
+                    Text("Eau: ${"%.0f".format(it.waterL)} L (E/C 0.50, ne pas rajouter apr\u00e8s malaxage)")
+                }
+            }
         }
     }
 }
@@ -164,6 +167,12 @@ fun LogbookScreen(db: AppDb) {
                 if (title.isNotBlank()) { db.entries().insert(SiteEntry(title = title, details = title, totalDzd = 0.0)); title = ""; items = db.entries().all() }
             }
         }) { Text(stringResource(R.string.save)) }
+        if (items.isEmpty()) {
+            DzEmptyState(
+                title = stringResource(R.string.empty_title),
+                hint = stringResource(R.string.empty_hint)
+            )
+        }
         items.forEach { e -> Text("\u2022 ${e.title}") }
     }
 }
